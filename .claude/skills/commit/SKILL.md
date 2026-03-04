@@ -5,6 +5,7 @@ allowed-tools: Bash, Read, Grep, Glob
 ---
 
 스테이징된 변경사항(`git diff --staged`)을 분석하여 아래 AngularJS 커밋 컨벤션에 맞는 커밋 메시지를 생성하고, 커밋을 수행한다.
+한국어로 작성한다.
 
 ## 절차
 
