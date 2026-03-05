@@ -113,6 +113,9 @@ class OrderServiceIntegrationTest {
 
         Option refreshedOption = optionRepository.findById(option.getId()).orElseThrow();
         assertThat(refreshedOption.getQuantity()).isEqualTo(100);
+
+        Member refreshedMember = memberRepository.findById(poorMember.getId()).orElseThrow();
+        assertThat(refreshedMember.getPoint()).isEqualTo(1);
     }
 
     @Test
@@ -124,7 +127,13 @@ class OrderServiceIntegrationTest {
 
         var request = new OrderRequest(option.getId(), 1, "카카오 주문");
 
-        orderService.placeOrder(kakaoMember, request);
+        Order order = orderService.placeOrder(kakaoMember, request);
+
+        assertThat(order.getId()).isNotNull();
+        assertThat(orderRepository.findById(order.getId())).isPresent();
+
+        Option refreshedOption = optionRepository.findById(option.getId()).orElseThrow();
+        assertThat(refreshedOption.getQuantity()).isEqualTo(99);
 
         then(kakaoMessageClient).should().sendToMe(anyString(), any(Order.class), any(Product.class));
     }
