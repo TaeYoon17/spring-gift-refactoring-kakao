@@ -1,11 +1,14 @@
 package gift.order;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
 public class OrderEventListener {
+    private static final Logger log = LoggerFactory.getLogger(OrderEventListener.class);
     private final KakaoMessageClient kakaoMessageClient;
 
     public OrderEventListener(KakaoMessageClient kakaoMessageClient) {
@@ -19,7 +22,8 @@ public class OrderEventListener {
         }
         try {
             kakaoMessageClient.sendToMe(event.kakaoAccessToken(), event.order(), event.product());
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            log.warn("카카오 메시지 전송 실패: orderId={}, message={}", event.order().getId(), e.getMessage(), e);
         }
     }
 }
