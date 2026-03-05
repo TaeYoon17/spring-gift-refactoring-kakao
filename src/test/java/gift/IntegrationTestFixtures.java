@@ -8,6 +8,8 @@ import gift.option.Option;
 import gift.option.OptionRepository;
 import gift.product.Product;
 import gift.product.ProductRepository;
+import gift.wish.Wish;
+import gift.wish.WishRepository;
 
 public class IntegrationTestFixtures {
 
@@ -27,5 +29,9 @@ public class IntegrationTestFixtures {
         Member member = repo.save(new Member(email, "password"));
         member.chargePoint(points);
         return repo.save(member);
+    }
+
+    public static Wish savedWish(WishRepository repo, Long memberId, Product product) {
+        return repo.save(new Wish(memberId, product));
     }
 }
