@@ -4,6 +4,10 @@
 
 ## 타임라인
 
+### 2026-03-05
+
+- [에러 처리 정책 분석 및 TODO (OrderEventListener, AuthenticationResolver, MemberService)](./history/2026-03-05-14-58-에러처리-정책-분석.md)
+
 ### 2026-02-26
 
 - [코드 스타일 정리 및 구조 리팩토링 (Phase 1)](./history/2026-02-26-15-00-코드-스타일-리팩토링.md)
